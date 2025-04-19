@@ -25,8 +25,8 @@ export default function Hero() {
     
   
   return (
-    <div>
-      <ul className=' w-[80%] mx-auto flex gap-3 sm:justify-end z-10'> 
+    <div className='hidden md:block'>
+      <ul className='w-[80%] flex mx-auto  gap-3 sm:justify-end z-10'> 
         {links.map((link)=>{
           return (
           <li 
