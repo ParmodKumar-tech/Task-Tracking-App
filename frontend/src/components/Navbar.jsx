@@ -49,7 +49,7 @@ function Navbar(){
                 }
 
                 {!userName &&
-                <li className='rounded-2xl p-1 bg-pink-600 text-white font-semibold'>
+                <li onClick={handleAutoCloseMenu} className='rounded-2xl p-1 bg-pink-600 text-white font-semibold'>
                     <NavLink to="/register">Login/Register</NavLink></li>
                 
                 }

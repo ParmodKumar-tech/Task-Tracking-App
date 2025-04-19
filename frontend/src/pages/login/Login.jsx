@@ -40,7 +40,7 @@ export default function Login(){
 
     return(
         <div className='w-full h-screen flex items-center bg-pink-200'>
-        <form onSubmit={handleSubmit(onSubmit)} className=' bg-[#f2ececea] m-5 w-[60%] mx-auto  border border-gray-400 rounded-md p-4 my-10' >
+        <form onSubmit={handleSubmit(onSubmit)} className=' bg-[#f2ececea] m-5 w-[80%] md:w-[70%] lg:w-[45%] mx-auto  border border-gray-400 rounded-md p-4 my-10' >
             
             <div className='flex items-center'>
                 <h1 className='text-2xl my-2'>Login to your account!</h1>

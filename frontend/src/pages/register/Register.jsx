@@ -40,7 +40,7 @@ export default function Register(){
 
     return(
         <div className='w-full h-screen flex items-center bg-pink-200'>
-        <form className='m-5 w-[60%]  mx-auto bg-[#f2ececea] border border-gray-400 rounded-md p-5 my-10' onSubmit={handleSubmit(onSubmit)}>
+        <form className='m-5 w-[80%] md:w-[70%] lg:w-[45%]  mx-auto bg-[#f2ececea] border border-gray-400 rounded-md p-5 my-10' onSubmit={handleSubmit(onSubmit)}>
          
         <div className='flex items-center'>
             <h1 className='text-2xl my-2'>Register for an account!</h1>
