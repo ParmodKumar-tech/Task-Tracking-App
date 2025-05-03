@@ -35,7 +35,7 @@ TaskTrack is a full-stack application that allows users to manage projects and t
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/tasktrack.git
+   git clone git@github.com:ParmodKumar-tech/Task-Tracking-App.git
    cd tasktrack
    ```
 
