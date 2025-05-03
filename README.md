@@ -7,7 +7,6 @@ TaskTrack is a full-stack application that allows users to manage projects and t
 - User authentication with JWT
 - Task creation, reading, updating, and deletion
 - Task status tracking (not started, in-progress, completed)
-- Responsive design for desktop and mobile
 
 ## Tech Stack
 
