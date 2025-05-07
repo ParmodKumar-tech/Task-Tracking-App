@@ -1,6 +1,6 @@
 # TaskTrack - Project & Task Management Application
 
-TaskTrack is a full-stack application that allows users to manage projects and track tasks. Built with React, Express, and PostgreSQL, this application provides a complete solution for personal task management.
+TaskTrack is a full-stack application that allows users to manage and track tasks. Built with React, Express, and PostgreSQL, this application provides a complete solution for personal task management.
 
 ## Features
 
