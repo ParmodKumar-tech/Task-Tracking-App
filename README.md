@@ -12,7 +12,7 @@ TaskTrack is a full-stack application that allows users to manage and track task
 
 ### Frontend
 - React.js
-- TypeScript
+- JavaScript
 - TailwindCSS
 - React Router DOM
 - Axios (for API calls)
