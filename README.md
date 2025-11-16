@@ -51,13 +51,8 @@ TaskTrack is a full-stack application that allows users to manage and track task
    VITE_API_URL=http://localhost:5000/api
 
    # Backend environment variables
-   PORT=5000
    JWT_SECRET=your_jwt_secret_key_here
-   DB_NAME=tasktracker
-   DB_USER=your_db_username
-   DB_PASSWORD=your_db_password
-   DB_HOST=localhost
-   DB_PORT=5432
+  
    ```
 
 ### Running the Application
