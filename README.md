@@ -72,8 +72,6 @@ TaskTrack is a full-stack application that allows users to manage and track task
    npm start
    ```
 
-4. Access the application at http://localhost:5173](https://vercel.com/parmod-kumars-projects-75c684e4/task-tracking-app)
-
 ## Project Structure
 
 ```
