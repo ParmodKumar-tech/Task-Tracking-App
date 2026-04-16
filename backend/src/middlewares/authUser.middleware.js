@@ -11,7 +11,7 @@ export const validUser=async(req,res,next)=>{
     }
     
     try{
-        const token = authCookies.authToken;
+        const token = authCookies;
         const decode=jwt.verify(token,process.env.JWT_SECRET);
         req.userId=decode.id;
         next();
