@@ -1,4 +1,4 @@
-# TaskTrack - Project & Task Management Application
+# TaskTrack - Project & Task Management Application [MERN]
 
 TaskTrack is a full-stack application that allows users to manage and track tasks. Built with React, Express, and MongoDB, this application provides a complete solution for personal task management.
 
