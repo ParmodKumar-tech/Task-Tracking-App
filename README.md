@@ -75,9 +75,9 @@ TaskTrack is a full-stack application that allows users to manage and track task
 ## API Endpoints
 
 ### User Routes
-  - GET        /api/v1/user/logout           Logout current user
-  - POST       /api/v1/user/register         Register new user
-  - POST       /api/v1/user/login            Login existing user
+  - GET        /api/v1/user/logout   -------        Logout current user
+  - POST       /api/v1/user/register -------        Register new user
+  - POST       /api/v1/user/login    -------        Login existing user
    - 
 ### Task Routes
    - GET        /api/v1/tasks                 Return all tasks (protected)
