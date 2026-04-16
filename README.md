@@ -31,11 +31,7 @@ TaskTrack is a full-stack application that allows users to manage and track task
 - React Router DOM
 - Axios (for API calls)
 
-## Prerequisites
 
-- Node.js
-- MongoDB database
-- 
 
 ## Getting Started
 
