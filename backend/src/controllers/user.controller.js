@@ -11,7 +11,7 @@ export const register=async(req,res)=>{
 
         return res.cookie("authToken",token,{
         httpOnly:true,
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 60 * 60 * 1000, 
         secure: process.env.NODE_ENV === "production",
         path: "/",
@@ -54,7 +54,7 @@ export const login=async(req,res)=>{
 
         return res.cookie("authToken",token,{
         httpOnly:true,
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 60 * 60 * 1000,  
         secure: process.env.NODE_ENV === "production",
         path: "/",
