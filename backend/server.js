@@ -25,7 +25,7 @@ app.use("/api/v1/user",userRoute);
 app.use("/api/v1",taskRoute);
 
 app.listen(process.env.PORT,()=>{
-    console.log(`Server is listening on ${process.env.PORT}`);
+    console.log(`Server is listening...`);
 })
 
 
