@@ -77,10 +77,12 @@ export const login=async(req,res)=>{
 
 export const logout=(req,res)=>{
 
-    res.clearCookie("authToken",{
-        httpOnly:true,
-        sameSite: "strict",
-    })
+    res.clearCookie("authToken", {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+        path: "/",
+    });
     
     return res.status(200).json({
         success:true,
