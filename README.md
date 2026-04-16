@@ -10,6 +10,13 @@ TaskTrack is a full-stack application that allows users to manage and track task
 
 ## Tech Stack
 
+### Backend
+- Express.js
+- MongoDB for database
+- JSON Web Tokens (JWT) for authentication
+- Joi validation for validate data fields
+- bcrypt for password hashing
+
 ### Frontend
 - React.js
 - JavaScript
@@ -17,15 +24,9 @@ TaskTrack is a full-stack application that allows users to manage and track task
 - React Router DOM
 - Axios (for API calls)
 
-### Backend
-- Express.js
-- MongoDB for database
-- JSON Web Tokens (JWT) for authentication
-- bcryptjs for password hashing
-
 ## Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js
 - MongoDB database
 
 ## Getting Started
@@ -48,11 +49,15 @@ TaskTrack is a full-stack application that allows users to manage and track task
 4. Configure environment variables by renaming `.env.example` to `.env` and updating the values:
    ```
    # Frontend environment variables
-   VITE_API_URL=http://localhost:5000/api
+   VITE_USER_API= http://localhost:1000/api/v1/user(your userApi)
+   VITE_TASK_API= http://localhost:1000/api/v1(your taskApi)
 
    # Backend environment variables
-   JWT_SECRET=your_jwt_secret_key_here
-  
+   MONGO_URL=your db url
+   CLIENT_URL= http://localhost:5175
+   PORT=1000 
+   JWT_SECRET=Cool(your jwt_secret)
+
    ```
 
 ### Running the Application
