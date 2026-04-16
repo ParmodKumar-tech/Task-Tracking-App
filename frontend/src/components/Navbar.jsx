@@ -15,7 +15,7 @@ function Navbar(){
         toast.dismiss(toastId);
 
         if(res.success){
-            localStorage.removeItem("token");
+            localStorage.removeItem("role");
             localStorage.removeItem("name");
             setUserName(null);
             setRole(null);
