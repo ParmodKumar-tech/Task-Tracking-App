@@ -5,18 +5,17 @@ export const AuthContent=createContext();
 export const useAuth=()=>{return useContext(AuthContent)};
 
 export const AuthProvider=({children})=>{
-    const [token,setToken]=useState(null);
     const [userName,setUserName]=useState(null);
-
+    const [role,setRole]=useState(null);
 
     useEffect(()=>{
-        const token=localStorage.getItem("token");
         const currentUserName=localStorage.getItem("name");
-        if(!token){toast.error("token not exists!, login again!")};
-        setToken(token);setUserName(currentUserName)
+        const role=localStorage.getItem("role");
+        setUserName(currentUserName);
+        setRole(role);
     },[])
 
-    const value={token,setToken,userName,setUserName};
+    const value={userName,setUserName,role,setRole};
     return <AuthContent.Provider value={value}>{children}</AuthContent.Provider>
 }
 

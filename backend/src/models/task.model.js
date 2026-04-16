@@ -17,22 +17,8 @@ const taskSchema=new mongoose.Schema({
         enum:["Completed","In Progress","Not Started"],
         default:"Not Started"
     },
-    user_id:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
-        required:true
-    },
-    created_date:
-    {
-        type:Date,
-        default:Date.now
-    },
-    completed_date:{
-        type:Date
-    },
 
+},{timestamps:true})
 
-})
-
-const taskModel=mongoose.model("Task",taskSchema);
+const taskModel=mongoose.model("task",taskSchema);
 export default taskModel;

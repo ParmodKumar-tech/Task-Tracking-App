@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { TASK_API_END_POINT } from '../utils/EndPoint';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -15,13 +14,14 @@ import toast from 'react-hot-toast';
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl';
 import { useAuth } from '../authContent';
+import { addTask, editTask } from '../api/task.api';
 
 export default function TaskDialog({ open, onClose,onTaskAdded,value }) {
-  
+
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("Not Started"); 
   const [description, setDescription] = useState("");
-  const {token}=useAuth();
+
 
   
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function TaskDialog({ open, onClose,onTaskAdded,value }) {
     }
 
     if(value && value.id){
-      onUpdateTask();
+      onEditTask();
     }
     else{
       onAddTask();
@@ -50,38 +50,35 @@ export default function TaskDialog({ open, onClose,onTaskAdded,value }) {
   };
 
   const onAddTask=async()=>{
-    try {
-      const res=await axios.post(`${TASK_API_END_POINT}/tasks`, 
-        { title, description,status },
-        {headers:{Authorization:`Bearer ${token}`}}
-      );
-      setTitle("");
-      setStatus("");
-      setDescription("");
-      onClose();
-      if(onTaskAdded) onTaskAdded();
-      if(res.data.success){toast.success(res.data.message)}
-    } catch (error) {
-      toast.error(error?.response?.data.message);
-    }
-  }
-  
-  const onUpdateTask =async()=>{
-      try {
-        const res=await axios.put(`${TASK_API_END_POINT}/tasks/${value.id}`, 
-          { title, description,status },
-          {headers:{Authorization:`Bearer ${token}`}}
-        );
+      const toastId = toast.loading("Adding Task");
+
+      const res=await addTask({title,description,status});
+      toast.dismiss(toastId);
+      if(res.success){
+        if(onTaskAdded) onTaskAdded();
+
         setTitle("");
         setStatus("");
         setDescription("");
         onClose();
-        if (onTaskAdded) onTaskAdded();
-        if(res.data.success){toast.success(res.data.message);}
-      } catch (error) {
-        const msg=error?.response?.data.message || error.message;
-        toast.error(msg);
+        toast.success(res.message)
       }
+  }
+  
+  const onEditTask =async()=>{
+        const toastId = toast.loading("Updating Task");
+
+        const res=await editTask(value.id,{title,description,status});
+        toast.dismiss(toastId);
+        if(res.success){
+        if(onTaskAdded) onTaskAdded();
+
+          setTitle("");
+          setStatus("");
+          setDescription("");
+          onClose();
+          toast.success(res.message);
+        }
     }
 
 
@@ -96,7 +93,6 @@ export default function TaskDialog({ open, onClose,onTaskAdded,value }) {
 
       
         <TextField
-        marginY={"1rem"}
           autoFocus
           required
           margin="dense"

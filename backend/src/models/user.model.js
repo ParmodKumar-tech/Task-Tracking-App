@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
+
 const userSchema=new mongoose.Schema({
     name:{
         type:String,
@@ -16,8 +17,10 @@ const userSchema=new mongoose.Schema({
         required:true
 
     },
-    country:{
+    role:{
         type:String,
+        enum:["user","admin"],
+        default:"user",
         required:true
     }
 
@@ -33,5 +36,5 @@ userSchema.pre("save",async function (next){
 })
 
 
-const userModel=mongoose.model("User",userSchema);
+const userModel=mongoose.model("user",userSchema);
 export default userModel;

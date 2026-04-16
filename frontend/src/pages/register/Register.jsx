@@ -1,10 +1,9 @@
 import React, {  useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { USER_API_END_POINT } from '../../utils/EndPoint';
 import { useAuth } from '../../authContent';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import { registerUser } from '../../api/user.api';
 
 
 export default function Register(){
@@ -14,28 +13,27 @@ export default function Register(){
         formState:{errors,isSubmitting}}=useForm();
    
     const navigate=useNavigate();
-    const {setUserName,setToken}=useAuth();
+    const {setUserName,setRole}=useAuth();
 
     const onSubmit=async(data)=>{
-            try{
-            const res=await axios.post(`${USER_API_END_POINT}/register`,data);
-            
-            if(res.data.success){
-                toast.success(res.data.message);
-                localStorage.setItem("name",res.data.data.name);
-                localStorage.setItem("token",res.data.token);
-                setToken(res.data.token);
-                setUserName(res.data.data.name);
+            const toastId = toast.loading("please wait...");
+
+            const res=await registerUser(data);
+            toast.dismiss(toastId);
+            if(res.success){
+                toast.success(res.message);
+                localStorage.setItem("name",res.data.name);
+                localStorage.setItem("role",res.data.role);
+
+                setUserName(res.data.name);
+                setRole(res.data.role);
                 navigate("/");
                 
             }
-            
-        }
-        catch(error){
-            toast.error(error.response.data.message);
-        }
-    
-  
+            else{
+                toast.error(res.message)
+            }
+
     }
 
     return(
@@ -90,26 +88,28 @@ export default function Register(){
             {...register("password", 
             {required:"*Required"})} 
             placeholder="password"/>
-
-            <div className='flex mt-4'>
-            <label className=' mr-2'>Country</label>
+            
+            <div className='my-3 flex flex-wrap justify-start gap-3'>
+            <label htmlFor="role">Role</label>
             <span className='text-red-500'>
-            {errors.country && errors.country.message}
+            {errors.role && errors.role.message}
             </span>
+            
+            <label>
+                <input type="radio" value="user" {...register("role", { required: true })} />
+                    User
+                </label>
+                <label>
+                    <input type="radio" value="admin" {...register("role")} />
+                    Admin
+                </label>
             </div>
-
-            <input 
-            className='w-full border rounded-md p-1'
-            {...register("country", 
-            {required:"*Required"})} 
-            placeholder="country"/>
 
 
             <button 
             className='mt-3 p-1 border  rounded-md w-full font-semibold bg-pink-600 text-white' 
             disabled={isSubmitting}>
             {isSubmitting?"Loading...":"Register"}</button>
-
 
 
         </form>

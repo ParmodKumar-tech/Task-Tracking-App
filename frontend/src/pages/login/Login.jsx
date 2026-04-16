@@ -1,42 +1,34 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../authContent';
-import { USER_API_END_POINT } from '../../utils/EndPoint';
+import { loginUser } from '../../api/user.api';
 
 export default function Login(){
     const {register,handleSubmit,formState:{errors,isSubmitting}}=useForm();
-    const {setUserName,setToken}=useAuth();
+    const {setUserName,setRole}=useAuth();
     const navigate=useNavigate();
     
 
     const onSubmit=async(data)=>{
-    
-        try{
-        const res=await axios.post(`${USER_API_END_POINT}/login`,data);
-        
-        if(res.data.success){
-            localStorage.setItem("name",res.data.data.name);
-            localStorage.setItem("token",res.data.token);
-            
-            setUserName(res.data.data.name);
-            setToken(res.data.token);
-            toast.success(res.data.message);
+        const toastId = toast.loading("please wait...");
+
+        const res= await loginUser(data);
+        toast.dismiss(toastId);
+        if(res.success){
+            localStorage.setItem("name",res.data.name);
+            localStorage.setItem("role",res.data.role);
+
+            setUserName(res.data.name);
+            setRole(res.data.role);
+            toast.success(res.message);
             navigate("/");
-        
-            
+        }else{
+            toast.error(res.message);
         }
-        
-        }
-        catch(error){
-            console.log(error.message);
-            toast.error(error.response.data.message);
-        }
-        
-    }
+}
 
     return(
         <div className='w-full h-screen flex items-center bg-pink-200'>
@@ -77,6 +69,7 @@ export default function Login(){
             {...register("password", 
             {required:"*Required"})} 
             placeholder="password"/>
+
 
             <button  
             className='mt-3 p-1 border rounded w-full text-white font-semibold bg-pink-600' 

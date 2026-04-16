@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import axios from 'axios';
 import Task from '../../components/Task';
-import { TASK_API_END_POINT } from '../../utils/EndPoint';
 import TaskDialog from '../../components/TaskDialog';
+import { fetchTasks } from '../../api/task.api';
+import toast from 'react-hot-toast';
 
 export default function Dashboard() {
   const location = useLocation();
   const navigate = useNavigate();
   const [openAddTask, setOpenAddTask] = useState(false);
   const [tasks,setTasks]=useState([]);
-  const token=localStorage.getItem("token");
+
 
   const params = new URLSearchParams(location.search);
   const taskStatusFilter=params.get("status") || "All Tasks";
@@ -21,28 +20,18 @@ export default function Dashboard() {
         setOpenAddTask(true);
         navigate(location.pathname, { replace: true });}
 
-      fetchTask()
+      onFetchTask()
     
   }, [location.state, navigate, location.pathname]);
 
-  const fetchTask=async()=>{
-    try{
-    const res=await axios.get(`${TASK_API_END_POINT}/tasks`,
-    {headers:{
-      Authorization:`Bearer ${token}`
-    }});
-  
-    if(res.data.success){
-      setTasks(res.data.data); 
-    }
-   
-    }
-    catch(error){
-  
-      toast.error(error.response.data.message);
-    }
 
+  
+  const onFetchTask=async()=>{
+    const res=await fetchTasks();
 
+    if(res.success){
+      setTasks(res.data); 
+    }
 }
   const filteredTasks=tasks.filter((task)=>{
     if(taskStatusFilter==="All Tasks") return true
@@ -63,7 +52,7 @@ export default function Dashboard() {
        
        {filteredTasks?.map((task,idx)=>{
         return (  
-        <Task key={idx} value={task} onTaskUpdated={fetchTask} 
+        <Task key={idx} value={task} onTaskAdded={onFetchTask} 
         onDelete={(deleteId)=>{
           setTasks((prev)=>prev.filter(t=>t._id!==deleteId))
         }}/> 
@@ -76,7 +65,7 @@ export default function Dashboard() {
       <TaskDialog 
       open={openAddTask} 
       onClose={() => setOpenAddTask(false)}
-      onTaskAdded={fetchTask} />
+      onTaskAdded={onFetchTask} />
 
     </div>
   )

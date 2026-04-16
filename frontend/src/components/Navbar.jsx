@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
 import {Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../authContent';
+import { logoutUser } from '../api/user.api';
+import toast from 'react-hot-toast';
 
 function Navbar(){
-    const {userName,setUserName,setToken}=useAuth();
+    const {userName,setUserName,role,setRole}=useAuth();
     const [menuItems,setMenuItems]=useState(false);
   
-    const handleLogout=()=>{
-        localStorage.removeItem("token");
-        localStorage.removeItem("name");
-        setUserName(null);
-        setToken(null);
+    const handleLogout=async()=>{
+        const toastId = toast.loading("logout...");
 
+        const res=await logoutUser();
+        toast.dismiss(toastId);
+
+        if(res.success){
+            localStorage.removeItem("token");
+            localStorage.removeItem("name");
+            setUserName(null);
+            setRole(null);
+            toast.success(res.message);
+        }
+        else{
+            toast.error(res.message);
+        }
+        
     }
 
 
@@ -33,7 +46,7 @@ function Navbar(){
 
         <div className='flex flex-col'>
         <Link to="/"><h2 className='font-bold sm:text-xl lg:text-xl'>Task Tracking App</h2></Link>
-        <p className='hidden lg:block'>{userName?'Welcome Back!':'please login/register for view your tasks!'}</p>
+        <p className=''>{userName?'Welcome Back!':'Login/Register for view your tasks!'}</p>
         </div>
         
         </div>
@@ -58,7 +71,7 @@ function Navbar(){
                 <div className='hidden md:flex'>    
                 <p className='separator my-auto font-bold mx-1'>|</p>
                 <p className='username align-middle my-auto mx-2'>
-                {userName?userName:"Not login"}</p>
+                {userName?`${userName} (${role})`:"Not login"}</p>
                 </div>
                 }
             </ul>
