@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const validUser=async(req,res,next)=>{
-    const authCookies= req.cookies;
+    const authCookies= req.cookies?.authToken;
     
     if (!authCookies) {
         return res.status(401).json({ success:false,message: "Unauthorized" });
