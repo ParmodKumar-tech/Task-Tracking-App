@@ -6,7 +6,10 @@ TaskTrack is a full-stack application that allows users to manage and track task
 
 - User authentication with JWT
 - Task creation, reading, updating, and deletion
-- Task status tracking (not started, in-progress, completed)
+- Mode: User , Admin
+- User(mode):  view and add new tasks
+- Admin(mode): Update and Delete any task
+- Task status tracking (not started, in-progress, completed) change by Admin
 
 ## Tech Stack
 
@@ -14,8 +17,25 @@ TaskTrack is a full-stack application that allows users to manage and track task
 - Express.js
 - MongoDB for database
 - JSON Web Tokens (JWT) for authentication
-- Joi validation for validate data fields
+- Joi-validation for validate data fields
 - bcrypt for password hashing
+
+- API Endpoints:
+  -- Task API --
+   - GET        /api/v1/tasks                 Return all tasks
+   - GET        /api/v1/task/:task_id         Return task based on task_id
+   - POST       /api/v1/task                  Create new task
+   - PUT        /api/v1/task_id               Replace task based on task_id
+   - Delete     /api/v1/task_id               Delete task based on task_id
+
+  -- User API --
+   - GET        /api/v1/user/logout           Logout current user
+   - POST       /api/v1/user/register         Register new user
+   - POST       /api/v1/user/login            Login existing user
+     
+- Middleware:
+  - authUser: to verify particular user token is valid or not
+  - validator: to verify all data fields follow pre-defined rules
 
 ### Frontend
 - React.js
