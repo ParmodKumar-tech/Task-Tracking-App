@@ -56,7 +56,6 @@ export default function TaskDialog({ open, onClose,onTaskAdded,value }) {
       toast.dismiss(toastId);
       if(res.success){
         if(onTaskAdded) onTaskAdded();
-
         setTitle("");
         setStatus("");
         setDescription("");

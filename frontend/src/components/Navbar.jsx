@@ -15,11 +15,11 @@ function Navbar(){
         toast.dismiss(toastId);
 
         if(res.success){
-            localStorage.removeItem("token");
+            localStorage.removeItem("role");
             localStorage.removeItem("name");
+            toast.success(res.message);
             setUserName(null);
             setRole(null);
-            toast.success(res.message);
         }
         else{
             toast.error(res.message);
@@ -54,7 +54,7 @@ function Navbar(){
         <nav className='w-[50%] flex md:flex-row md:h-fit items-center justify-center'>
             <ul className={menuItems?'w-screen left-0 bg-green-300 flex flex-col items-start absolute h-auto  border top-[13%]':
                 'hidden md:flex'}>
-                {userName &&
+                {userName && role &&
                 <div className='flex flex-col sm:flex-row p-2 gap-7 items-start '>
                 <li onClick={handleAutoCloseMenu} className='font-bold'> <NavLink to="/" state={{ showAddTask: true }}>Add Task</NavLink></li>
                 <li onClick={handleLogout} className='mx-2 font-bold'><NavLink to="/login">Logout</NavLink></li>
