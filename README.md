@@ -86,6 +86,3 @@ TaskTrack is a full-stack application that allows users to manage and track task
    - PUT        /api/v1/task_id     ------          Replace task based on task_id (protected)
    - Delete     /api/v1/task_id     ------          Delete task based on task_id (protected)
    
-## License
-
-This project is licensed under the MIT License.
