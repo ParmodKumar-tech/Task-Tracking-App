@@ -80,11 +80,11 @@ TaskTrack is a full-stack application that allows users to manage and track task
   - POST       /api/v1/user/login    -------        Login existing user
    - 
 ### Task Routes
-   - GET        /api/v1/tasks                 Return all tasks (protected)
-   - GET        /api/v1/task/:task_id         Return task based on task_id (protected)
-   - POST       /api/v1/task                  Create new task (protected)
-   - PUT        /api/v1/task_id               Replace task based on task_id (protected)
-   - Delete     /api/v1/task_id               Delete task based on task_id (protected)
+   - GET        /api/v1/tasks       ------          Return all tasks (protected)
+   - GET        /api/v1/task/:task_id ------        Return task based on task_id (protected)
+   - POST       /api/v1/task        ------          Create new task (protected)
+   - PUT        /api/v1/task_id     ------          Replace task based on task_id (protected)
+   - Delete     /api/v1/task_id     ------          Delete task based on task_id (protected)
    
 ## License
 
