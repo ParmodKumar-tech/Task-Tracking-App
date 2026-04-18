@@ -13,8 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 import toast from 'react-hot-toast';
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl';
-import { useAuth } from '../authContent';
 import { addTask, editTask } from '../api/task.api';
+import { useAuth } from '../contexts/authContext';
 
 export default function TaskDialog({ open, onClose,onTaskAdded,value }) {
 

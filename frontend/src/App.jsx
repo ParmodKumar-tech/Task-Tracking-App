@@ -1,7 +1,7 @@
 import {BrowserRouter} from "react-router-dom";
 import PageRoutes from "./Router";
 import {Toaster} from "react-hot-toast";
-import { AuthProvider } from "./authContent";
+import { AuthProvider } from "./contexts/authContext";
 import Navbar from "./components/Navbar";
 
 function App() {

@@ -27,8 +27,9 @@ export default function Dashboard() {
 
   
   const onFetchTask=async()=>{
+    const toastId=toast.loading("Task loading...");
     const res=await fetchTasks();
-
+    toast.dismiss(toastId);
     if(res.success){
       setTasks(res.data); 
     }
@@ -43,7 +44,7 @@ export default function Dashboard() {
 
 
   return (
-    <div className='flex flex-col p-2 w-[90%] my-1 mx-auto border-black rounded-xl h-screen bg-pink-200'>
+    <div className='flex flex-col p-2 w-[90%] my-1 mx-auto border-black rounded-xl h-screen bg-pink-200 border border-black-700'>
       <div className='flex justify-between p-2'>
         <h1 className='text-xl font-bold'>{`${taskStatusFilter}`}</h1>
       </div>
@@ -52,9 +53,11 @@ export default function Dashboard() {
        
        {filteredTasks?.map((task,idx)=>{
         return (  
-        <Task key={idx} value={task} onTaskAdded={onFetchTask} 
+        <Task key={idx} 
+        value={task} 
+        onTaskAdded={onFetchTask} 
         onDelete={(deleteId)=>{
-          setTasks((prev)=>prev.filter(t=>t._id!==deleteId))
+        setTasks((prev)=>prev.filter(t=>t._id!==deleteId))
         }}/> 
         )        
         })

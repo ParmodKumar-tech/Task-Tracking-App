@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Link, NavLink } from 'react-router-dom';
-import { useAuth } from '../authContent';
+import { useAuth } from '../contexts/authContext';
 import { logoutUser } from '../api/user.api';
 import toast from 'react-hot-toast';
 
@@ -13,7 +13,6 @@ function Navbar(){
 
         const res=await logoutUser();
         toast.dismiss(toastId);
-
         if(res.success){
             localStorage.removeItem("role");
             localStorage.removeItem("name");
@@ -45,14 +44,14 @@ function Navbar(){
         </div>
 
         <div className='flex flex-col'>
-        <Link to="/"><h2 className='font-bold sm:text-xl lg:text-xl'>Task Tracking App</h2></Link>
+        <Link to="/" onClick={()=>setMenuItems(false)}><h2 className='font-bold sm:text-xl lg:text-xl'>Task Tracking App</h2></Link>
         <p className=''>{userName?'Welcome Back!':'Login/Register for view your tasks!'}</p>
         </div>
         
         </div>
 
         <nav className='w-[50%] flex md:flex-row md:h-fit items-center justify-center'>
-            <ul className={menuItems?'w-screen left-0 bg-green-300 flex flex-col items-start absolute h-auto  border top-[13%]':
+            <ul className={menuItems?'w-screen left-0 bg-green-300 flex flex-col items-start absolute h-auto  border top-[15%]':
                 'hidden md:flex'}>
                 {userName && role &&
                 <div className='flex flex-col sm:flex-row p-2 gap-7 items-start '>
@@ -62,9 +61,15 @@ function Navbar(){
                 }
 
                 {!userName &&
-                <li onClick={handleAutoCloseMenu} className='rounded-2xl p-1 bg-pink-600 text-white font-semibold'>
-                    <NavLink to="/register">Login/Register</NavLink></li>
+                <>
+                <li onClick={handleAutoCloseMenu} 
+                className='rounded-2xl p-2 text-black font-semibold'>
+                <NavLink to="/login">Login</NavLink></li>
                 
+                <li onClick={handleAutoCloseMenu} 
+                className='rounded-2xl p-2 text-black font-semibold'>
+                <NavLink to="/register">Register</NavLink></li>
+                </>
                 }
                     
                 {

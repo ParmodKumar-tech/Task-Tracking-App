@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import TaskDialog from './TaskDialog'
 import axios from 'axios';
-import { useAuth } from '../authContent';
 import toast from 'react-hot-toast';
 import { deleteTask, editTask } from '../api/task.api';
+import { useAuth } from '../contexts/authContext';
 
 export default function Task(props) {
     const [openTask,setOpenTask]=useState(false);

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { useAuth } from '../../authContent';
+import { useAuth } from '../../contexts/authContext';
 import { loginUser } from '../../api/user.api';
 
 export default function Login(){
