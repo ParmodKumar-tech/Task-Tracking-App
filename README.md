@@ -1,4 +1,4 @@
-# TaskTrack - Project & Task Management Application
+# TaskTrack - Project & Task Management Application [MERN]
 
 TaskTrack is a full-stack application that allows users to manage and track tasks. Built with React, Express, and MongoDB, this application provides a complete solution for personal task management.
 
@@ -6,7 +6,10 @@ TaskTrack is a full-stack application that allows users to manage and track task
 
 - User authentication with JWT
 - Task creation, reading, updating, and deletion
-- Task status tracking (not started, in-progress, completed)
+- Mode: User , Admin
+- User(mode):  view and add new tasks
+- Admin(mode): Update and Delete any task
+- Task status tracking (not started, in-progress, completed) change by Admin
 
 ## Tech Stack
 
@@ -14,8 +17,12 @@ TaskTrack is a full-stack application that allows users to manage and track task
 - Express.js
 - MongoDB for database
 - JSON Web Tokens (JWT) for authentication
-- Joi validation for validate data fields
+- Joi-validation for validate data fields
 - bcrypt for password hashing
+     
+- Middleware:
+  - authUser: to verify particular user token is valid or not
+  - validator: to verify all data fields follow pre-defined rules
 
 ### Frontend
 - React.js
@@ -24,10 +31,7 @@ TaskTrack is a full-stack application that allows users to manage and track task
 - React Router DOM
 - Axios (for API calls)
 
-## Prerequisites
 
-- Node.js
-- MongoDB database
 
 ## Getting Started
 
@@ -35,85 +39,50 @@ TaskTrack is a full-stack application that allows users to manage and track task
 
 1. Clone the repository:
    ```
-   git clone git@github.com:ParmodKumar-tech/Task-Tracking-App.git
-   cd tasktrack
+   git clone https://github.com/ParmodKumar-tech/Task-Tracking-App.git
+   cd Task-Tracking-App
    ```
 
-2. Install dependencies:
+2. Install dependencies in frontend folder & setup .env:
    ```
+   cd frontend
    npm install
-   ```
 
-3. Create a MongoDB database named `tasktracker`.
+   Create .env file:
+    VITE_USER_API=ayourapi/api/v1/user
+    VITE_TASK_API=yourapi/api/v1
 
-4. Configure environment variables by renaming `.env.example` to `.env` and updating the values:
-   ```
-   # Frontend environment variables
-   VITE_USER_API= http://localhost:1000/api/v1/user(your userApi)
-   VITE_TASK_API= http://localhost:1000/api/v1(your taskApi)
-
-   # Backend environment variables
-   MONGO_URL=your db url
-   CLIENT_URL= http://localhost:5175
-   PORT=1000 
-   JWT_SECRET=Cool(your jwt_secret)
-
-   ```
-
-### Running the Application
-
-1. Start the backend server:
-   ```
-   npm run dev:server
-   ```
-
-2. In a separate terminal, start the frontend development server:
-   ```
+   ## Run frontend:
    npm run dev
    ```
 
-3. Or run both concurrently:
+3. Install dependencies in backend folder & setup .env:
    ```
+   cd backend
+   npm install
+
+   Create .env file:
+    MONGO_URL=your db url
+    CLIENT_URL=your frontend url
+    PORT=your port
+    JWT_SECRET=your jwt secrect key
+    NODE_ENV=production
+
+   ## Run Backend:
    npm start
    ```
-
-## Project Structure
-
-```
-tasktrack/
-├── server/                  # Backend code
-│   ├── config/              # Database configuration
-│   ├── controllers/         # API controllers
-│   ├── middleware/          # Express middleware
-│   ├── models/              # Sequelize models
-│   ├── routes/              # API routes
-│   └── index.js             # Server entry point
-│
-├── src/                     # Frontend code
-│   ├── components/          # React components
-│   ├── context/             # React context providers
-│   ├── pages/               # Page components
-│   ├── types/               # TypeScript types
-│   ├── App.tsx              # Main App component
-│   └── main.tsx             # React entry point
-│
-├── .env                     # Environment variables
-└── README.md                # Project documentation
-```
 
 ## API Endpoints
 
 ### User Routes
-- `POST /api/v1/user/register` - Register a new user
-- `POST /api/v1/user/login` - Login a user
-
+  - GET        /api/v1/user/logout   -------        Logout current user
+  - POST       /api/v1/user/register -------        Register new user
+  - POST       /api/v1/user/login    -------        Login existing user
+   - 
 ### Task Routes
-- `POST /api/v1/task/tasks` - Create a new task (protected)
-- `GET /api/v1/task/tasks` - Get all tasks for a project (protected)
-- `GET /api/v1/task/tasks/:task_id` - Get a task by ID (protected)
-- `PUT /api/v1/tasks/tasks/:task_id` - Update a task (protected)
-- `DELETE /api/v1/task/tasks/:task_id` - Delete a task (protected)
-
-## License
-
-This project is licensed under the MIT License.
+   - GET        /api/v1/tasks       ------          Return all tasks (protected)
+   - GET        /api/v1/task/:task_id ------        Return task based on task_id (protected)
+   - POST       /api/v1/task        ------          Create new task (protected)
+   - PUT        /api/v1/task_id     ------          Replace task based on task_id (protected)
+   - Delete     /api/v1/task_id     ------          Delete task based on task_id (protected)
+   
